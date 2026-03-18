@@ -1,16 +1,17 @@
 name: CI
-
 on:
   push:
     branches: [main]
   pull_request:
   merge_group:
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   changes:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     outputs:
       packages: ${{ steps.filter.outputs.changes }}
     steps:
@@ -59,6 +60,6 @@ jobs:
     steps:
       - name: Check test results
         run: |
-          if [[ "${{ needs.test.result }}" == "failure" ]]; then
+          if [[ "${{ needs.test.result }}" == "failure" || "${{ needs.test.result }}" == "cancelled" ]]; then
             exit 1
           fi
