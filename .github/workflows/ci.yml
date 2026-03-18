@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      simple-redirector: ${{ steps.filter.outputs.simple-redirector }}
+      simple-assets: ${{ steps.filter.outputs.simple-assets }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            simple-redirector:
+              - 'packages/redirector/**'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+            simple-assets:
+              - 'packages/assets/**'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+
+  test:
+    needs: changes
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - package: simple-redirector
+            changed: ${{ needs.changes.outputs.simple-redirector }}
+          - package: simple-assets
+            changed: ${{ needs.changes.outputs.simple-assets }}
+    if: ${{ matrix.changed == 'true' }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Setup pnpm
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5
+        with:
+          cache: true
+      - name: Setup Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        with:
+          node-version: 24
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests
+        run: pnpm --filter ${{ matrix.package }} test
+
+  all-tests:
+    if: always()
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check test results
+        run: |
+          if [[ "${{ needs.test.result }}" == "failure" ]]; then
+            exit 1
+          fi
