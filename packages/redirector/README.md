@@ -1,6 +1,6 @@
 # Simple Redirector
 
-A lightweight URL shortener and redirector service built on Cloudflare Workers with
+A lightweight URL shortener and redirector service built on Cloudflare Workers with 
 KV storage.
 
 ## Overview
@@ -43,3 +43,19 @@ npx wrangler kv:key put "shortname" "https://example.com" --binding redirects --
 ### KV Namespaces
 
 - `redirects`: Stores the shortname → URL mappings
+
+## Development
+
+```bash
+# Install dependencies (from monorepo root)
+pnpm install
+
+# Run tests
+pnpm --filter redirector test
+
+# Deploy
+pnpm --filter redirector cf-deploy
+
+# Generate types
+pnpm --filter redirector cf-typegen
+```
