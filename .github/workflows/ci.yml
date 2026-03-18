@@ -24,10 +24,12 @@ jobs:
               - 'packages/redirector/**'
               - 'package.json'
               - 'pnpm-lock.yaml'
+              - '.github/workflows/ci.yml'
             assets:
               - 'packages/assets/**'
               - 'package.json'
               - 'pnpm-lock.yaml'
+              - '.github/workflows/ci.yml'
 
   test:
     needs: changes
