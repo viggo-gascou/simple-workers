@@ -1,0 +1,12 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "test": "vitest",
+    "cf-deploy": "wrangler deploy",
+    "cf-typegen": "wrangler types"
+  }
+}
