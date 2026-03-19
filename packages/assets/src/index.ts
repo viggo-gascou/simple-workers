@@ -11,10 +11,17 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { html } from './404';
+
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		// We shouldn't get here unless the asset doesn't exist,
-		// so we redirect to the homepage.
-		return Response.redirect('https://vgascou.co', 302);
-	},
+  async fetch(request, env, ctx): Promise<Response> {
+    // We shouldn't get here unless the asset doesn't exist,
+    // so we 404
+    const year = new Date().getFullYear();
+
+    return new Response(html.replaceAll('{YEAR}', year.toString()), {
+      status: 404,
+      headers: { 'content-type': 'text/html;charset=UTF-8' },
+    });
+  },
 } satisfies ExportedHandler<Env>;
