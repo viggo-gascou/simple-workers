@@ -1,13 +1,13 @@
 # Simple Redirector
 
-A lightweight URL shortener and redirector service built on Cloudflare Workers with 
-KV storage.
+A lightweight URL shortener and redirector service built on Cloudflare Workers
+with KV storage.
 
 ## Overview
 
 Simple Redirector is a serverless URL shortening service that provides fast, global
-redirects using Cloudflare's edge network. It stores redirect mappings in Cloudflare KV
-and serves a custom 404 page for invalid URLs.
+redirects using Cloudflare's edge network. It stores redirect mappings in
+Cloudflare KV and serves a custom 404 page for invalid URLs.
 
 ## Features
 
@@ -18,6 +18,7 @@ and serves a custom 404 page for invalid URLs.
 ## Usage
 
 Visit any path on the domain to get redirected:
+
 - `https://<YOUR_DOMAIN>/redirect` → redirects to stored URL
 - `https://<YOUR_DOMAIN>/invalidurl` → shows custom 404 page
 
@@ -27,10 +28,12 @@ Add redirect mappings to your KV namespace:
 
 ```bash
 # Development
-npx wrangler kv:key put "shortname" "https://example.com" --binding redirects
+pnpx wrangler kv:key put "shortname" "https://example.com" --binding redirects
 
 # Production
-npx wrangler kv:key put "shortname" "https://example.com" --binding redirects --env production
+pnpx wrangler kv:key put "shortname" "https://example.com" \
+    --binding redirects \
+    --env production
 ```
 
 ## Configuration

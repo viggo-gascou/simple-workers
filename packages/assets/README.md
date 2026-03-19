@@ -17,6 +17,7 @@ directory and redirects to the homepage for any missing assets.
 ## Usage
 
 Access your assets via the domain:
+
 - `https://<YOUR_DOMAIN>/your-filename` → serves the `assets/your-filename` file
 - `https://<YOUR_DOMAIN>/invalid-filename` → redirects to homepage
 
