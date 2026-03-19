@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "simple-redirector",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-07-09",
+  "vars": {
+    "ROOT_URL": "https://simple-redirector.workers.dev",
+    "ENVIRONMENT": "dev",
+  },
+  "kv_namespaces": [
+    {
+      "binding": "redirects",
+      "id": "test-kv-namespace-id",
+    },
+  ],
+}
