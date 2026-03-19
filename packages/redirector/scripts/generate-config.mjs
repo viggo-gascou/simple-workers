@@ -43,13 +43,6 @@ const config = {
           id: process.env.PROD_KV_ID,
         },
       ],
-      routes: [
-        {
-          pattern: process.env.PROD_DOMAIN,
-          zone_name: process.env.PROD_DOMAIN,
-          custom_domain: true,
-        },
-      ],
     },
   },
 };
