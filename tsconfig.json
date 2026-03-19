@@ -7,5 +7,4 @@
     "skipLibCheck": true,
     "noEmit": true,
   },
-  "references": [{ "path": "./packages/redirector" }, { "path": "./packages/assets" }],
 }
