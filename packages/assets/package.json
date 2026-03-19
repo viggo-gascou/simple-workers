@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "test": "vitest",
-    "dev": "node scripts/generate-config.mjs && wrangler dev",
-    "build": "node scripts/generate-config.mjs",
+    "dev": "wrangler dev",
     "cf-deploy": "wrangler deploy",
     "cf-typegen": "wrangler types"
   }

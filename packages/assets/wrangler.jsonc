@@ -10,8 +10,8 @@
   },
   "routes": [
     {
-      "pattern": "assets.your-domain.com",
-      "zone_name": "your-domain.com",
+      "pattern": "assets.vgascou.co",
+      "zone_name": "vgascou.co",
       "custom_domain": true,
     },
   ],

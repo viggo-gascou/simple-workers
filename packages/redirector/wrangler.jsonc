@@ -3,14 +3,18 @@
   "name": "simple-redirector",
   "main": "src/index.ts",
   "compatibility_date": "2025-07-09",
-  "vars": {
-    "ROOT_URL": "https://simple-redirector.workers.dev",
-    "ENVIRONMENT": "dev",
-  },
+  "observability": { "enabled": true },
   "kv_namespaces": [
     {
       "binding": "redirects",
-      "id": "test-kv-namespace-id",
+      "id": "10690819bb3946e180c118435ae9f350",
+    },
+  ],
+  "routes": [
+    {
+      "pattern": "vgascou.co",
+      "zone_name": "vgascou.co",
+      "custom_domain": true,
     },
   ],
 }
