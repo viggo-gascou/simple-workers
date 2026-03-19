@@ -31,6 +31,9 @@ A static asset hosting service using Cloudflare Workers.
 
 ```bash
 pnpm install
+
+# Generate wrangler configs (requires .env files in each package)
+pnpm -r build
 ```
 
 ### Testing

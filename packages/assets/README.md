@@ -46,18 +46,20 @@ To change the assets directory, update the path in `wrangler.jsonc`:
 }
 ```
 
+## Setup
+
+1. Copy `.env.example` to `.env` and fill in your values
+2. Run `pnpm build` to generate `wrangler.jsonc`
+
 ## Development
 
 ```bash
-# Install dependencies (from monorepo root)
-pnpm install
+# Generate wrangler.jsonc and start dev server
+pnpm dev
 
-# Run tests
-pnpm --filter assets test
+# Run tests (uses wrangler.test.jsonc, no setup needed)
+pnpm test
 
 # Deploy
-pnpm --filter assets cf-deploy
-
-# Generate types
-pnpm --filter assets cf-typegen
+pnpm cf-deploy
 ```

@@ -47,18 +47,21 @@ pnpx wrangler kv:key put "shortname" "https://example.com" \
 
 - `redirects`: Stores the shortname → URL mappings
 
+## Setup
+
+1. Copy `.env.example` to `.env` and fill in your values
+2. Copy `wrangler.example.jsonc` to `wrangler.jsonc` or run `pnpm build` to generate
+3. Run `pnpm cf-typegen` to generate types
+
 ## Development
 
 ```bash
-# Install dependencies (from monorepo root)
-pnpm install
+# Generate wrangler.jsonc and start dev server
+pnpm dev
 
-# Run tests
-pnpm --filter redirector test
+# Run tests (uses wrangler.test.jsonc, no setup needed)
+pnpm test
 
 # Deploy
-pnpm --filter redirector cf-deploy
-
-# Generate types
-pnpm --filter redirector cf-typegen
+pnpm cf-deploy
 ```
