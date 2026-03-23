@@ -5,7 +5,9 @@
     "config:semverAllWeekly",
     "security:minimumReleaseAgeNpm",
     ":automergeRequireAllStatusChecks",
+    ":automergePatch",
     ":automergeStableNonMajor",
+    ":automergePr",
     ":assignAndReview(viggo-gascou)"
   ],
   "vulnerabilityAlerts": {
