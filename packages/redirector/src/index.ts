@@ -16,7 +16,6 @@ import { html } from './404';
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
-    const shortname = url.pathname.slice(1).toLowerCase();
     const year = new Date().getFullYear();
 
     const ErrorResponse = new Response(html.replaceAll('{YEAR}', year.toString()), {
@@ -24,7 +23,15 @@ export default {
       headers: { 'content-type': 'text/html;charset=UTF-8' },
     });
 
-    if (url.pathname === '/' || shortname === '') {
+    const PREFIX = '/go/';
+
+    if (!url.pathname.startsWith(PREFIX)) {
+      return new Response(null, { status: 400 });
+    }
+
+    const shortname = url.pathname.slice(PREFIX.length).toLowerCase();
+
+    if (shortname === '') {
       return ErrorResponse;
     }
 
