@@ -17,8 +17,18 @@ const mockEnv = {
 } as Env;
 
 describe('Simple Redirector (unit style)', () => {
-  it('responds with error 404 for invalid URL', async () => {
+  it('responds with 400 for path without /go/ prefix', async () => {
     const request = new IncomingRequest('https://example.com/InvalidURL');
+    const ctx = createExecutionContext();
+
+    const response = await worker.fetch(request, mockEnv, ctx);
+    await waitOnExecutionContext(ctx);
+
+    expect(response.status).toBe(400);
+  });
+
+  it('responds with error 404 for /go/ with no shortname', async () => {
+    const request = new IncomingRequest('https://example.com/go/');
     const ctx = createExecutionContext();
 
     const response = await worker.fetch(request, mockEnv, ctx);
@@ -28,7 +38,7 @@ describe('Simple Redirector (unit style)', () => {
   });
 
   it('responds with correct code, and redirects to a known URL', async () => {
-    const request = new IncomingRequest('https://example.com/redirect');
+    const request = new IncomingRequest('https://example.com/go/redirect');
     const ctx = createExecutionContext();
 
     const response = await worker.fetch(request, mockEnv, ctx);
