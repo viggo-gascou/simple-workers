@@ -29,13 +29,7 @@ Add redirect mappings to your KV namespace using the shortname as the key
 (no `/go/` prefix needed):
 
 ```bash
-# Development
 pnpx wrangler kv:key put "shortname" "https://example.com" --binding redirects
-
-# Production
-pnpx wrangler kv:key put "shortname" "https://example.com" \
-    --binding redirects \
-    --env production
 ```
 
 ### Cloudflare WAF Rule
