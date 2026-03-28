@@ -11,20 +11,22 @@ Cloudflare KV and serves a custom 404 page for invalid URLs.
 
 ## Features
 
-- 💾 Cloudflare KV storage for redirect mappings
-- 🎨 Custom animated 404 error page
-- 🌙 Dark/light mode support for error page
+- Cloudflare KV storage for redirect mappings
+- Custom animated 404 error page with dark/light mode support
+- All redirects served under `/go/` prefix to allow WAF-level bot filtering
 
 ## Usage
 
-Visit any path on the domain to get redirected:
+Redirects are served under the `/go/` prefix:
 
-- `https://<YOUR_DOMAIN>/redirect` → redirects to stored URL
-- `https://<YOUR_DOMAIN>/invalidurl` → shows custom 404 page
+- `https://<YOUR_DOMAIN>/go/shortname` → 301 redirect to stored URL
+- `https://<YOUR_DOMAIN>/go/unknown` → 404 custom error page
+- `https://<YOUR_DOMAIN>/anything-else` → 400 Bad Request (no body)
 
 ### Adding Redirects
 
-Add redirect mappings to your KV namespace:
+Add redirect mappings to your KV namespace using the shortname as the key
+(no `/go/` prefix needed):
 
 ```bash
 # Development
@@ -36,30 +38,31 @@ pnpx wrangler kv:key put "shortname" "https://example.com" \
     --env production
 ```
 
-## Configuration
+### Cloudflare WAF Rule
 
-### Environment Variables
+To block bot traffic at the edge before it reaches the worker, add a WAF rule
+with the action **Block**:
 
-- `ROOT_URL`: Base URL for the service
-- `ENVIRONMENT`: Current environment (dev/production)
+```text
+http.host eq "<YOUR_DOMAIN>" and not starts_with(http.request.uri.path, "/go/") and not http.request.uri.path in {"/" "/favicon.ico" "/robots.txt"}
+```
 
-### KV Namespaces
+The hostname check scopes the rule to this worker only — without it, the rule
+would also apply to other subdomains on the same zone (e.g. `assets.<YOUR_DOMAIN>`).
+The allowlisted paths (`/`, `/favicon.ico`, `/robots.txt`) are excluded to avoid
+blocking legitimate browser requests.
+
+## KV Namespaces
 
 - `redirects`: Stores the shortname → URL mappings
-
-## Setup
-
-1. Copy `.env.example` to `.env` and fill in your values
-2. Copy `wrangler.example.jsonc` to `wrangler.jsonc` or run `pnpm build` to generate
-3. Run `pnpm cf-typegen` to generate types
 
 ## Development
 
 ```bash
-# Generate wrangler.jsonc and start dev server
+# Start dev server
 pnpm dev
 
-# Run tests (uses wrangler.test.jsonc, no setup needed)
+# Run tests
 pnpm test
 
 # Deploy

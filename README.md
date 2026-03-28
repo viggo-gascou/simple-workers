@@ -8,17 +8,17 @@ A monorepo of lightweight Cloudflare Workers services.
 
 A URL shortener and redirector service using Cloudflare Workers and KV storage.
 
-- 💾 KV storage for redirect mappings
-- 🎨 Custom animated 404 error page
-- 🌙 Dark/light mode support for error page
+- KV storage for redirect mappings
+- All redirects served under `/go/` prefix to allow WAF-level bot filtering
+- Custom animated 404 error page with dark/light mode support
 
 ### [simple-assets](packages/assets)
 
 A static asset hosting service using Cloudflare Workers.
 
-- 📦 Static asset hosting
-- 🌍 Global edge network delivery
-- ↪️ Automatic fallback to homepage for 404s
+- Static asset hosting via Cloudflare Workers static assets binding
+- Global edge network delivery
+- Custom animated 404 error page with dark/light mode support
 
 ## Development
 
@@ -31,9 +31,6 @@ A static asset hosting service using Cloudflare Workers.
 
 ```bash
 pnpm install
-
-# Generate wrangler configs (requires .env files in each package)
-pnpm -r build
 ```
 
 ### Testing
