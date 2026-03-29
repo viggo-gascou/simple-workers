@@ -38,13 +38,16 @@ To block bot traffic at the edge before it reaches the worker, add a WAF rule
 with the action **Block**:
 
 ```text
-http.host eq "<YOUR_DOMAIN>" and not starts_with(http.request.uri.path, "/go/") and not http.request.uri.path in {"/" "/favicon.ico" "/robots.txt"}
+(http.host eq "<YOUR_DOMAIN>" and
+  not starts_with(http.request.uri.path, "/go/") and
+  not http.request.uri.path in {"/" "/robots.txt"} and
+  not starts_with(http.request.uri.path, "/favicon"))
 ```
 
 The hostname check scopes the rule to this worker only — without it, the rule
 would also apply to other subdomains on the same zone (e.g. `assets.<YOUR_DOMAIN>`).
-The allowlisted paths (`/`, `/favicon.ico`, `/robots.txt`) are excluded to avoid
-blocking legitimate browser requests.
+The remaining allowlisted paths cover legitimate browser requests: the root path `/`,
+`/robots.txt`, and any `favicon` files.
 
 ## KV Namespaces
 
