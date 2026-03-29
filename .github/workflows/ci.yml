@@ -22,11 +22,13 @@ jobs:
           filters: |
             redirector:
               - 'packages/redirector/**'
+              - 'packages/shared/**'
               - 'package.json'
               - 'pnpm-lock.yaml'
               - '.github/workflows/ci.yml'
             assets:
               - 'packages/assets/**'
+              - 'packages/shared/**'
               - 'package.json'
               - 'pnpm-lock.yaml'
               - '.github/workflows/ci.yml'

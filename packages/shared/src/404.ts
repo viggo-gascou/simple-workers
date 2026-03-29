@@ -1,4 +1,4 @@
-export const html = `<!doctype html>
+export const html = (year: number, domain: string) => `<!doctype html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -91,6 +91,6 @@ export const html = `<!doctype html>
 <body>
     <div class="typewriter">404 - Page Not Found</div>
     <div class="footer">
-        <div class="footer-typewriter">&copy; vgascou.co - {YEAR}</div>
+        <div class="footer-typewriter">&copy; ${domain} - ${year}</div>
     </div>
 </body>`;

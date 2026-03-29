@@ -21,9 +21,19 @@ importers:
         specifier: ^4.75.0
         version: 4.76.0
 
-  packages/assets: {}
+  packages/assets:
+    dependencies:
+      '@simple-workers/shared':
+        specifier: workspace:*
+        version: link:../shared
 
-  packages/redirector: {}
+  packages/redirector:
+    dependencies:
+      '@simple-workers/shared':
+        specifier: workspace:*
+        version: link:../shared
+
+  packages/shared: {}
 
 packages:
 

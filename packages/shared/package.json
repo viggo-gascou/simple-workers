@@ -1,0 +1,9 @@
+{
+  "name": "@simple-workers/shared",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    "./404": "./src/404.ts",
+    "./error-response": "./src/error-response.ts"
+  }
+}
