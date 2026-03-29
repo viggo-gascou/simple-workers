@@ -2,6 +2,9 @@
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "simple-redirector",
   "main": "src/index.ts",
+  "assets": {
+    "directory": "./public",
+  },
   "compatibility_date": "2025-07-09",
   "observability": { "enabled": true },
   "kv_namespaces": [
