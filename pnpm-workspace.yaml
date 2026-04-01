@@ -1,6 +1,9 @@
 packages:
   - 'packages/*'
 allowBuilds:
-  esbuild: true
+  esbuild: false
   sharp: false
-  workerd: true
+  workerd: false
+blockExoticSubdeps: true
+minimumReleaseAge: 1440
+trustPolicy: no-downgrade

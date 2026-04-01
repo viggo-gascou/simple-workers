@@ -53,7 +53,7 @@ jobs:
           node-version: 24
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Run tests
         run: pnpm --filter ${{ matrix.package }} test
 
