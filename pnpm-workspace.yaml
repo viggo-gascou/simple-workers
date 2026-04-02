@@ -2,6 +2,7 @@ packages:
   - 'packages/*'
 allowBuilds:
   esbuild: false
+  lefthook: false
   sharp: false
   workerd: false
 blockExoticSubdeps: true

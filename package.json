@@ -9,7 +9,10 @@
     "deploy:assets": "pnpm --filter assets cf-deploy"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.10",
     "@cloudflare/vitest-pool-workers": "^0.13.0",
+    "lefthook": "^2.1.4",
+    "markdownlint-cli2": "^0.22.0",
     "typescript": "^6.0.0",
     "vitest": "~4.1.0",
     "wrangler": "^4.75.0"
