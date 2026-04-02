@@ -1,7 +1,7 @@
 pre-commit:
   commands:
     check:
-      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}"
+      glob: '*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}'
       run: pnpm exec biome check --fix --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
     markdownlint:
@@ -12,4 +12,5 @@ pre-push:
     test:
       only:
         - ref: main
+      glob: '{packages/**/*.ts,package.json,pnpm-lock.yaml}'
       run: pnpm test
