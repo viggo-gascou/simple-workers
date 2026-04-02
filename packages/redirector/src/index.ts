@@ -1,7 +1,7 @@
 import { errorResponse } from '@simple-workers/shared/error-response';
 
 export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
     const PREFIX = '/go/';
@@ -19,7 +19,7 @@ export default {
     try {
       const value = await env.redirects.get(shortname);
       return value ? Response.redirect(value, 301) : errorResponse(url.hostname);
-    } catch (err) {
+    } catch {
       return errorResponse(url.hostname);
     }
   },
