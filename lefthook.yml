@@ -1,0 +1,15 @@
+pre-commit:
+  commands:
+    check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}"
+      run: pnpm exec biome check --fix --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      stage_fixed: true
+    markdownlint:
+      run: pnpm exec markdownlint-cli2 "**/*.md" "#node_modules"
+
+pre-push:
+  commands:
+    test:
+      only:
+        - ref: main
+      run: pnpm test

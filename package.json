@@ -3,10 +3,13 @@
   "private": true,
   "packageManager": "pnpm@10.33.0",
   "scripts": {
+    "check": "biome check .",
+    "check:ci": "biome ci .",
     "test": "pnpm -r test",
     "cf-typegen": "pnpm -r cf-typegen",
     "deploy:redirector": "pnpm --filter redirector cf-deploy",
-    "deploy:assets": "pnpm --filter assets cf-deploy"
+    "deploy:assets": "pnpm --filter assets cf-deploy",
+    "prepare": "lefthook install"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
