@@ -6,5 +6,5 @@ allowBuilds:
   sharp: false
   workerd: false
 blockExoticSubdeps: true
-minimumReleaseAge: 1440
+minimumReleaseAge: 4320
 trustPolicy: no-downgrade
