@@ -4,14 +4,12 @@
     "config:best-practices",
     "config:semverAllWeekly",
     "security:minimumReleaseAgeNpm",
-    ":automergeRequireAllStatusChecks",
-    ":automergePatch",
-    ":automergeStableNonMajor",
-    ":automergePr",
-    ":assignAndReview(viggo-gascou)"
+    ":reviewer(viggo-gascou)"
   ],
   "vulnerabilityAlerts": {
-    "enabled": true
+    "enabled": true,
+    "labels": ["security"],
+    "automerge": true
   },
   "osvVulnerabilityAlerts": true,
   "packageRules": [
@@ -22,8 +20,7 @@
     {
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major", "minor", "patch"],
-      "groupName": "github-actions",
-      "automerge": true
+      "groupName": "github-actions"
     }
   ]
 }
