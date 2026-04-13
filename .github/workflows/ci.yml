@@ -20,22 +20,19 @@ jobs:
         id: filter
         with:
           filters: |
+            shared: &common
+              - 'packages/shared/**'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
+              - '.github/workflows/**'
+              - '.github/actions/**'
             redirector:
+              - *common
               - 'packages/redirector/**'
-              - 'packages/shared/**'
-              - 'package.json'
-              - 'pnpm-lock.yaml'
-              - 'pnpm-workspace.yaml'
-              - '.github/workflows/ci.yml'
-              - '.github/actions/setup/action.yml'
             assets:
+              - *common
               - 'packages/assets/**'
-              - 'packages/shared/**'
-              - 'package.json'
-              - 'pnpm-lock.yaml'
-              - 'pnpm-workspace.yaml'
-              - '.github/workflows/ci.yml'
-              - '.github/actions/setup/action.yml'
 
   lint:
     runs-on: ubuntu-latest
@@ -50,6 +47,8 @@ jobs:
     strategy:
       matrix:
         package: ${{ fromJSON(needs.changes.outputs.packages) }}
+      exclude:
+        - package: shared
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
