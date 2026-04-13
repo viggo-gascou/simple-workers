@@ -25,6 +25,7 @@ jobs:
               - 'packages/shared/**'
               - 'package.json'
               - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
               - '.github/workflows/ci.yml'
               - '.github/actions/setup/action.yml'
             assets:
@@ -32,6 +33,7 @@ jobs:
               - 'packages/shared/**'
               - 'package.json'
               - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
               - '.github/workflows/ci.yml'
               - '.github/actions/setup/action.yml'
 
