@@ -4,8 +4,11 @@
     "config:best-practices",
     "config:semverAllWeekly",
     "security:minimumReleaseAgeNpm",
+    ":automergeRequireAllStatusChecks",
+    ":automergePr",
     ":reviewer(viggo-gascou)"
   ],
+  "automerge": true,
   "vulnerabilityAlerts": {
     "enabled": true,
     "labels": ["security"],
@@ -20,7 +23,8 @@
     {
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major", "minor", "patch"],
-      "groupName": "github-actions"
+      "groupName": "github-actions",
+      "automerge": true
     }
   ]
 }
