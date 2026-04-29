@@ -7,6 +7,8 @@ on:
 jobs:
   add-reviewer:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/github-script@v9
         with:
