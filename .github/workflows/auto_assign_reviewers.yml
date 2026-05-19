@@ -25,9 +25,12 @@ jobs:
               });
             }
 
-            await github.rest.issues.addAssignees({
-              owner: owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              assignees: [author]
-            });
+            const isBot = context.payload.sender?.type === 'Bot';
+            if (!isBot) {
+              await github.rest.issues.addAssignees({
+                owner: owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                assignees: [author]
+              });
+            }
