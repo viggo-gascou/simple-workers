@@ -1,0 +1,27 @@
+[[repos]]
+repo = "https://github.com/DavidAnson/markdownlint-cli2"
+rev = "v0.22.1"
+hooks = [{ id = "markdownlint-cli2" }]
+
+[[repos]]
+repo = "https://github.com/zizmorcore/zizmor-pre-commit"
+rev = "v1.25.2"
+hooks = [{ id = "zizmor", args = ["--fix=safe"] }]
+
+[[repos]]
+repo = "local"
+
+[[repos.hooks]]
+id = "biome-check"
+name = "biome check"
+entry = "pnpm exec biome check --fix --no-errors-on-unmatched --files-ignore-unknown=true --colors=off"
+language = "system"
+files = "\\.(js|ts|cjs|mjs|jsx|tsx)$"
+
+[[repos.hooks]]
+id = "test"
+name = "pnpm test"
+entry = "pnpm test"
+language = "system"
+stages = ["pre-push"]
+pass_filenames = false

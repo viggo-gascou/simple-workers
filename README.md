@@ -33,6 +33,14 @@ A static asset hosting service using Cloudflare Workers.
 pnpm install
 ```
 
+### Git Hooks
+
+This project uses [prek](https://prek.j178.dev) for git hooks (pre-commit and pre-push). Once prek is installed, run:
+
+```bash
+pnpm install-hooks
+```
+
 ### Testing
 
 ```bash

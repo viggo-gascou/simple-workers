@@ -9,13 +9,11 @@
     "cf-typegen": "pnpm -r cf-typegen",
     "deploy:redirector": "pnpm --filter redirector cf-deploy",
     "deploy:assets": "pnpm --filter assets cf-deploy",
-    "prepare": "lefthook install"
+    "install-hooks": "prek install"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
     "@cloudflare/vitest-pool-workers": "^0.16.0",
-    "lefthook": "^2.1.4",
-    "markdownlint-cli2": "^0.22.0",
     "typescript": "^6.0.0",
     "vitest": "~4.1.0",
     "wrangler": "^4.75.0"
