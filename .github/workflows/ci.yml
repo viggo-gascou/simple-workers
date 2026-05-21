@@ -21,6 +21,8 @@ jobs:
       packages: ${{ steps.filter.outputs.changes }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
       - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4
         id: filter
         with:
@@ -43,6 +45,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - run: pnpm check:ci
 
@@ -57,8 +61,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
-      - run: pnpm --filter ${{ matrix.package }} test
+      - run: pnpm --filter ${MATRIX_PACKAGE} test
+        env:
+          MATRIX_PACKAGE: ${{ matrix.package }}
 
   all-tests:
     if: always()
