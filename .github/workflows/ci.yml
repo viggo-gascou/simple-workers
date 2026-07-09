@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: ['**'] # Run on all branches, all commits
+    branches: [main]
   pull_request:
   merge_group:
 
@@ -9,9 +9,9 @@ permissions:
   contents: read
   pull-requests: read
 
-# Prevent concurrent runs for the same commit
+# Prevent concurrent runs for the same workflow and branch/PR
 concurrency:
-  group: ci-${{ github.ref }}-${{ github.sha }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
