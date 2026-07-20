@@ -1,7 +1,7 @@
 {
   "name": "simple-workers",
   "private": true,
-  "packageManager": "pnpm@11.10.0",
+  "packageManager": "pnpm@11.13.1",
   "scripts": {
     "check": "biome check .",
     "check:ci": "biome ci .",
@@ -14,7 +14,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
     "@cloudflare/vitest-pool-workers": "^0.18.0",
-    "typescript": "^6.0.0",
+    "typescript": "^7.0.0",
     "vitest": "~4.1.0",
     "wrangler": "^4.75.0"
   }
