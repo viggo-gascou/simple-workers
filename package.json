@@ -1,7 +1,7 @@
 {
   "name": "simple-workers",
   "private": true,
-  "packageManager": "pnpm@11.19.0",
+  "packageManager": "pnpm@11.20.0",
   "scripts": {
     "check": "biome check .",
     "check:ci": "biome ci .",
