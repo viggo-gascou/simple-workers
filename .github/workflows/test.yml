@@ -8,7 +8,7 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
+  pull-requests: read # Required by dorny/paths-filter to list changed files on pull requests.
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   changes:
+    name: Detect changed packages
     runs-on: ubuntu-latest
     outputs:
       packages: ${{ steps.filter.outputs.changes }}
@@ -23,7 +24,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
         id: filter
         with:
           filters: |
@@ -42,6 +43,7 @@ jobs:
               - 'packages/assets/**'
 
   test:
+    name: Test package
     needs: changes
     if: ${{ needs.changes.outputs.packages != '[]' }}
     strategy:
@@ -60,12 +62,15 @@ jobs:
           MATRIX_PACKAGE: ${{ matrix.package }}
 
   all-tests:
+    name: All tests
     if: always()
     needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: Check test results
+        env:
+          TEST_RESULT: ${{ needs.test.result }}
         run: |
-          if [[ "${{ needs.test.result }}" == "failure" || "${{ needs.test.result }}" == "cancelled" ]]; then
+          if [[ "${TEST_RESULT}" == "failure" || "${TEST_RESULT}" == "cancelled" ]]; then
             exit 1
           fi
