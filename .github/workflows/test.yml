@@ -62,7 +62,7 @@ jobs:
           MATRIX_PACKAGE: ${{ matrix.package }}
 
   all-tests:
-    name: All tests
+    name: all-tests
     if: always()
     needs: [test]
     runs-on: ubuntu-latest
